@@ -28,6 +28,14 @@ Registers are high-speed internal memory-storage units within the CPU. Some regi
 
 
 
+----- Memory -----
+当想要执行某个program的时候，我们把这个program涉及到的codes and data load to memory, 这时，需要给这些instructions and data分配memory.
+In memory, (多种memory类型，目前还不清楚）, there are lots of slots, each slot can store 8bits -1byte info, each slot has its own identification -> address, 
+gcc编译的时候，可以将data and instructions所在的slots的addresses编译成32-bit的，也可以是64-bit的
+
+
+
+
 ----- 32-bit and 64-bit operating system -----
 in computing, there are two types of processors existing, i.e., 32-bit and 64-bit processors. These types of processors tell us how much memory a processor can access from a CPU register. For instance, 
 
@@ -36,6 +44,13 @@ A 32-bit system can access 2^32 (=2^2*2^10*2^10*2^10) different memory addresses
 A 64-bit system (想像成有一个64bits的地方来表示访问的地址) can access 2^64 (=2^10*2^10*2^10*2^34, 这将是2^32*2^30个地址，如果每个地址还是对应一个1 Byte的memory unit，这个processor最多能访问2^34GB的RAM) differet memory addresses, i.e., actually 18-Quintillion bytes of RAM. In short, any amount of memory greater than 4GB can be easily handled by it. This 64-bit processor will not be a obstruction for computation.
 
 Most computer made in the 1990s and early 2000s were 32-bit machines. The CPU register stores memory addresses, which is how the processor accesses data from RAM.
+
+
+----- dataType -----
+double float char int，首先要明确的是，无论是那种数据类型，它存储时的本质都是a serie of binary bits; 尤其要注意的是char类型，虽然我们认得各种各样的字符'A'，但是machine只认binary bit, 所以我们根据ASCII表为每种字符规定好了对应的特殊binary bits, 比如'A'是65， 'a'是97， '0'是48
+
+
+
 
 
 
