@@ -1,0 +1,20 @@
+CPU <-> processor, interchangable, 
+
+assume we have a program containing lots of codes (instructions), this program locates in hard drive, when we want to run this program, this program will be load to memory, then, cpu will "fetch" part of instructions from the program in memory and "decode" these instructions, and execute these simple and basic "instructions" such as adding two numbers in a high speed.
+
+CPU <-> memory <-> hard drive, fecth, decode, execute
+
+
+----- complie the source field for c language program -----
+
+source file for c language program -> executable file 需要经历preprocess变成.i file, 再经历compiler proper变成.s file,
+再经历assembler变成.o file, 再经历linker变成 executable file;
+其中preprocessor的工作是，将所有include的头文件内内容复制粘贴进source file, 一般而言, head file里面只有函数的declaration, 比如我们source file如果用到了printf函数, head file这里负责声明说: printf的定义稍后会被带来，不要报错;
+
+之后preprocessed .i file 会被进一步编译成assembly codes (我感觉是一种介于human language and machine language之间的语言，目前为止还是人类可以看懂的语言）
+
+再之后assembler上场负责把assembly language编译成binary code(machine code, same as what used in executable field), 可以说这一步所产生的.o file(object file)就是最后executable file的子集了
+
+那么之所以还有下一步linker, 是因为我们的头文件只是declare the existences of external functions used in our source file, 但是这些functions的definitions还没有实实在在的被看到，所以linker的工作就是把std library or other libraries中对于这些functions的定义的files也编译成.o file (object files), 然后将这些.o files和我们所写的source file编译而来的object file联合在一起, 形成最终的executable file.
+
+
