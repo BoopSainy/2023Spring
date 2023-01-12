@@ -1,3 +1,5 @@
+前言：想学Operating System却发现C programming忘的差不多了，而且CS 354的内容也基本不了解，全部需要从头补起，难受想哭，这里都是学习过程中的笔记，来源于网上的各种教材，尽量不记录废话。
+
 CPU <-> processor, interchangable, 
 
 assume we have a program containing lots of codes (instructions), this program locates in hard drive, when we want to run this program, this program will be load to memory, then, cpu will "fetch" part of instructions from the program in memory and "decode" these instructions, and execute these simple and basic "instructions" such as adding two numbers in a high speed.
@@ -16,5 +18,25 @@ source file for c language program -> executable file 需要经历preprocess变�
 再之后assembler上场负责把assembly language编译成binary code(machine code, same as what used in executable field), 可以说这一步所产生的.o file(object file)就是最后executable file的子集了
 
 那么之所以还有下一步linker, 是因为我们的头文件只是declare the existences of external functions used in our source file, 但是这些functions的definitions还没有实实在在的被看到，所以linker的工作就是把std library or other libraries中对于这些functions的定义的files也编译成.o file (object files), 然后将这些.o files和我们所写的source file编译而来的object file联合在一起, 形成最终的executable file.
+
+
+
+----- CPU -----
+The computer's central processing unit (CPU) is the portion of a computer that retrieves and executes instructions. {CPU的责任是，提取+执行指令} The CPU is essentially the brain of a CAD system. It consists of an arithmetic and logic unit (ALU), a control unit, and various registers. The CPU is often simply referred to as the processor. The ALU performs arithmetic operations, logic operations, and related operations, according to the program instructions.
+The control unit controls all CPU operations, including ALU operations the movement of data within the CPU, and the exchange of data and control signals across external interfaces (system bus). 
+Registers are high-speed internal memory-storage units within the CPU. Some registers are user-visible; that is, available to the programmer via the machine instruction set.
+
+
+
+----- 32-bit and 64-bit operating system -----
+in computing, there are two types of processors existing, i.e., 32-bit and 64-bit processors. These types of processors tell us how much memory a processor can access from a CPU register. For instance, 
+
+A 32-bit system can access 2^32 (=2^2*2^10*2^10*2^10) different memory addresses, on the most common architecture, the fundamental unit of addressing is the Byte (每个地址对应一个1 Byte的memory unit). That is to say, 1 address corresponds 1 Byte place on RAM. Therefore, if CPU can only access 2^32 addresses, it can only access 2^32 Bytes -> 4 GBytes RAM. 也就是说, despite you have a 8GB RAM, but 32-bit GPU will limit the computation ability because your processor can only fetch instructions and data from half of RAM. {补全后面的内容, A 32-bit system can access 2^32 different memory addresses, i.e., 4GB of RAM or physical memory ideally, it can access more than 4GB of RAM also.}
+
+A 64-bit system (想像成有一个64bits的地方来表示访问的地址) can access 2^64 (=2^10*2^10*2^10*2^34, 这将是2^32*2^30个地址，如果每个地址还是对应一个1 Byte的memory unit，这个processor最多能访问2^34GB的RAM) differet memory addresses, i.e., actually 18-Quintillion bytes of RAM. In short, any amount of memory greater than 4GB can be easily handled by it. This 64-bit processor will not be a obstruction for computation.
+
+Most computer made in the 1990s and early 2000s were 32-bit machines. The CPU register stores memory addresses, which is how the processor accesses data from RAM.
+
+
 
 
