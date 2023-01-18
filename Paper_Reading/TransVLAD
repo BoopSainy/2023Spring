@@ -1,1 +1,47 @@
 
+Abstract:
+
+(point out three main designs in their work for geo-localization task)
+
+1. Attention-based feature maps produced by "sparse transformer" will be aggregated into a global descriptor by "TransVLAD" module.
+
+propose an efficient TransVLAD module, aggregates attention-based feature maps into a discriminative and compact global descriptor.
+
+2. Attention-based feature maps derive from "sparse transformer", which can effectively and efficiently encode global dependencies.
+
+{Unlike existing methods that generate feature maps using only convolutional neural networks}, we propose a sparse transformer to encode global dependencies and compute attention-based feature maps, {which effectively reduces visual ambiguities that occurs in large-scale geolocalization problems. A positional embedding mechanism is used to learn the corresponding geometric configurations between query and galley images.}
+
+3. In my guess, in addition to using global descriptors to match the ground and positive satellite images, they also utilize the attention-based feature maps from multi-scale to pretrain the model by self-supervised learning way. 
+
+Finally, rather than only learning from the global descriptors on entire images, we propose a self-supervised learning method to further encode more information multi-scale patches between the query and positive gallery images. 
+--------------------------------------------------------------------------------------------
+Extensive experiments on three challenging large-scale datasets indicate that our model outperforms state-of-the-art models, and has lower computational complexity. 
+
+
+
+Introduction:
+
+(1. briefly introduce the content of geo-localization and the main difficulties in geo-localization task)
+
+  Visual geo-localization is an important task with a broad range of applications in e.g., automatic driving and robot navigation. Given the rapid development of deep CNNs and vision transformers (ViTs), more discriminant and comprehensive feature representation can be extracted from image data. Therefore, image-based localization has attracting growing attention. In this paper, the visual geo-localization problem is treated as an image retrieval task, which aims to estimate the geospatial location of a query image by matching it with a gallery of geo-tagged images.
+  
+(2. to overcome these problems, previous work mainly use NetVLAD -> ViT. For me, it makes sense to use ViT because the corresponding relationships between ground and satellite images sometimes are not local enough.)
+
+  The fundamental problem consists in learning discriminative representations from images with variations in appearance and perspective. To address this problem, state-of-the-art methods typically utilize CNNs with NetVLAD, inspired by the Vector of Locally Aggregated Descriptors, to learn feature representations. {However, the locality assumption of the CNNs hinders their performance in complex scenes, where there may be visual complexities such as occlusions and transient objects.} In contrast, when visual signals are ambiguous or incomplete, the human visual signals are ambiguous or incomplete, the human visual uses not only local information, but also the global context / longer dependencies for accurate predictions. Recent works therefore, exploit ViTs to solve image retrieval tasks (geo-localization task). However, ViTs perform poorly on our task because: (1) (2) ...?
+  
+(3. CNN-based backbone, replace VGG-16 by MobileNetV3, introduce efficient VLAD module "TransVLAD" module}
+
+  Motivated by the above observations, we consider retaining the CNN architecture with NetVLAD. However, existing methods use VGG-16, which is intractable on compact embedded or mobile devices due to model complexity. Therefore, we adopt a lighweight CNN, like MobileNetV3 as the CNN backbone, and introduce an efficient TransVLAD module.
+  
+  More specifically, our proposed TransVLAD is composed of a transformer module, along with a grouped VLAD layer. The transformer improves global contextual reasoning, and attention-based feature maps can be produced by exploiting its self-attention properties. This can effectively reduce visual ambiguities or incompleteness in large-scale geo-localization tasks. Moreover, the positional embedding mechanism in transformers enables our TransVLAD module to encode corresponding geometric configurations between query and gallery images during training. Considering that ViTs are computationally intensive, we propose a sparse transformer based on the idea of sparse attention. In addition, inspired by, the efficiency of our grouped VLAD layer is improved by ...
+  
+  
+
+Methods:
+  Our model is composed of a CNN backbone and the proposed TransVLAD module (see the architecture in Figure 1). This section provides additional details of our TransVLAD module and self-supervised learning method.
+  
+3.1 Sparse Transformer of TransVLAD
+
+  Considering that transformers are computation-intensive and lack of the inductive biases inherent in CNNs, such as translation invariance and locality, we use a CNN backbone to extract local features, and propose a sparse transformer as shown in Figure 2 to compute attention-based feature maps. In general, the ViT receives a sequence of 1D token embeddings as input. For the 2D feature maps, we split a feature map m (CxHxW) into a sequence of 2D patches m_p (NxP^2xC), and downsample the patches into single pixels x_p (NxC), where C is the number of channels, (H,W) is the resolution of the feature map, N=HW/P^2 is the total number of the patches, and P is the downsample rate. Then, x_p is employed as the input embeddings.
+  Similar to ViT, we use standard learnable 1D position embeddings x_pos (NxC). The embedding mechanism retains positional information and lets our TransVLAD encode corresponding geometric configurations between query and gallery images during training. Therefore, we can produce the resulting sequence of embedding vectors x_0 = x_p + x_pos, which is used as the input for the L-layer transformer encoder.
+  We adopt the ViT as a background for our L-layer transformer encoder. Each layer consists of a multihead self-attention (MSA) module, a multi-layer perceptron (MLP), and LayerNorm (LN) blocks.
