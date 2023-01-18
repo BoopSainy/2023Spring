@@ -15,3 +15,17 @@ A learning agent must be able to sense the state of its environment to some exte
 
 { Reinforcement Learning's challenges: }
 (1): trade off between exploration and exploitation, 
+
+
+It is values with which we are most concerned when making and evaluating decisions. Action choices are made based on value judgments. We seek actions that bring about states of highest value, not highest reward, because these actions obtain the greatest amount of reward for us over the long run. Unfortunately, it is much harder to determine values than it is to determine rewards. Rewards are basically given directly by the environment, but values must be estimated and re-estimated from sequences of observations an agent makes over its entire lifetime.
+
+The fourth and final elemnt of some reinforcement learning systems is a model of the environment. This is something that mimics the behavior of the environment, or more generally, that allows inferences to be made about how the environment will behave. For example, given a state and action for current time step t, the model might predict the resultant next state and next reward. Models are used for planning, by which we mean any way of deciding on a course of 
+
+
+1.4 Limitations and Scope;
+
+Reinforcement learning relies heavily on the concept of state - as input to the policy and value function, and as both input to and output from the model (state transition). Informally, we can think of the state as a signal conveying to the agent some sense of "how the environment is" at a particular time. ... In effect, we assume that the state signal is produced by some preprocessing system that is nominally part of the agent's environment. In other words, our concern in this book is not with designing the state signal, but with deciding what action to take as a function of whatever state signal is available.
+{看一下计老师对于state的来源，because textbook simply treats the state as a signal preprocessed by environment in a mysterious way. Textbooks prefer to focus on: "given available state signal, how to confirm a policy function to decide what actions to be made"}
+
+Most of the reinforcement learning methods we consider in this book are structured around estimating value functions, but it is not strictly necessary to do this to solve reinforcement learning problems.
+
