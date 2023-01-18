@@ -1,0 +1,18 @@
+Finite Markov Decision Processes: Finite MDPs
+
+
+
+===== MDP框架的灵活多样型：我们通常会把面对的强化学习问题构建进MDP框架：
+
+The MDP framework is abstract and flexible and can be applied to many different problems in many different ways. 
+
+For example, the time steps need not refer to fixed intervals of real time; they can refer to arbitrary successive stages of decision making and acting.
+
+The actions can be low-level controls, such as the voltages applied to the motors of a robot arm, or high-level decisions, such as whether or not to have lunch or to go to graduate school. {MDP中的actions可以是low-level controls比如机械臂中的电压大小，也可以是high-level decisions比如我们是否要去读研}
+
+Similarly, the states can take a wide variety of forms. They can be completely determined by low-level sensations, such as direct sensor readings, or they can be more high-level and abstract, such as symbolic descriptions of objects in a room.
+{state也可以是多种多样的，它可以是low-level sensation signals，比如agent上的sensor感应到的数据；它也可以是抽象的high-level的，比如它可以是房间内objects' abstract representations}
+
+Some of what makes up a state could be based on memory of past sensations or even be entirely mental or subjective. For example, an agent could be in the state of not being sure where an object is, or of having just been surprised in some clear defined sense.
+
+In particular, the boundary between agent and environment is typically not the same as the physical boundary of a robot's. Usually, the boundary is drawn closer to the agent than that. For example, the motors and mechanical linkages of a robot 
