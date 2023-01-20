@@ -1,0 +1,17 @@
+An important trade-off that is made with region proposal generation is the number of regions vs. the computational complexity. The more regions you generate, the more likely you will be able to find the object. On the flip-side, if you exhausitively generate all possible proposals, it won't be possible to run the object detector in real-time, for example. In some cases, it is possible to use problem specific information to reduce the number of ROI's. For example, pedestrians typically have a ratio of approximately 1.5, so it is not useful to generate ROI's with a ratio of 0.25.
+
+Generally workflow for object detection:
+  1. First, a model or algorithm is used to generate regions of interest or region proposals. These region proposals are a large set of bounding boxes spanning the full image ( that is, a coarse localization process for objects)
+  2. In the second step, visual features are extracted for each of the bounding boxes, they are evaluated and it is determined whether and which objects are presented in the proposals based on visual featrues.
+  3. In the final post-processing step, overlapping boxes are combined into a single bounding box.
+  
+
+
+Feature Extraction:
+  The goal of feature extration is to reduce a variable sized image to a fixed set of visual features. Image classification models are typically constructed using strong visual feature extraction methods. Whether they are based on traditional computer vision approaches, such as for example, filter based approached, histogram methods, etc., or deep learning methods, they all have the exact same objective: extract features from the input image that are representative for the task at hands and use these features to determine the class of the image.
+  {feature extractor, a series of eariler layers, used to extract visual features from input images. These visual features should be abstract, representative, discriminative, for downstream tasks at hands.}
+  In object detection frameworks, people typically use pretrained image classification models to extract visual features, as these tend to generalize fairly well. For example, a model trained on the MS CoCo dataset is able to etract fairly generic features. In order to improve the model however, it is advised to experiment with different approaches. 
+
+
+Non-maximum suppression:
+  The general idea of non-maximum suppression is to reduce the number of detections bounding boxes to the actual number of objects present. If the object in the frame 
