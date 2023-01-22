@@ -45,3 +45,10 @@ Methods:
   Considering that transformers are computation-intensive and lack of the inductive biases inherent in CNNs, such as translation invariance and locality, we use a CNN backbone to extract local features, and propose a sparse transformer as shown in Figure 2 to compute attention-based feature maps. In general, the ViT receives a sequence of 1D token embeddings as input. For the 2D feature maps, we split a feature map m (CxHxW) into a sequence of 2D patches m_p (NxP^2xC), and downsample the patches into single pixels x_p (NxC), where C is the number of channels, (H,W) is the resolution of the feature map, N=HW/P^2 is the total number of the patches, and P is the downsample rate. Then, x_p is employed as the input embeddings.
   Similar to ViT, we use standard learnable 1D position embeddings x_pos (NxC). The embedding mechanism retains positional information and lets our TransVLAD encode corresponding geometric configurations between query and gallery images during training. Therefore, we can produce the resulting sequence of embedding vectors x_0 = x_p + x_pos, which is used as the input for the L-layer transformer encoder.
   We adopt the ViT as a background for our L-layer transformer encoder. Each layer consists of a multihead self-attention (MSA) module, a multi-layer perceptron (MLP), and LayerNorm (LN) blocks.
+
+
+
+3.3 Self-supervised Learning Method:
+  暂时treat TransVLAD as a black box which can convert attention based feature map to a global descriptor.
+  
+  State-of-the-art models only utilizes the first-ranked positive images for the most similar ones in representation space as the positive training samples. We propose a self-supervised learning method to further encode more representative information from multi-scale patches between the query and lower-ranked positive gallery images.
