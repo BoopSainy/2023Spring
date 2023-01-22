@@ -1,0 +1,15 @@
+Soft Exemplar Highlighting for Cross-View Image-Based Geo-Localization
+
+Abstract - The goal of ground-to-aerial image geo-localization is to determine the location of a ground query image by matching it against a reference database consisting of aerial/satellite images. This task is highly challenging due to the large appearance difference caused by extreme changes in viewpoint and orientation. In this work, we show that the training difficulty is an important cue that can be leveraged to improve metric learning on cross-view images. More specifically, we propose a new Soft Exemplar Highlighting (SEH) loss to achieve online soft selection of exemplars. 
+
+Adaptive weights are generated for exemplars by measuring their associated training difficulty using distance rectified logistic regression. These weights are then constrained to remove simple exemplars from training and truncate the large weights of extremely hard exemplars to escape from the trap with a local optimal solution. 
+
+We further use the proposed SEH loss to train two mainstream convolutional neural networks for ground-to-aerial image-based geo-localization. Experimental results on two benchmark cross-view image datasets demonstrate that the proposed method achieves significant improvements in feature discriminativeness and outperforms the state-of-the-art image-based geo-localization methods.
+
+
+
+
+
+Introduction
+
+Traditional image-based geo-localization methods mainly focus on the matching of query and reference images that are captured from ground views. However, capturing ground images over
