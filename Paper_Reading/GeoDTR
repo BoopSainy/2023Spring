@@ -1,0 +1,54 @@
+Cross-view Geo-localization via Learning Disentangled Geometric Layout Correspondence.
+
+What is geo-localization:
+  Cross-view geo-localization aims to estimate the location of a query ground image by matching it to a reference geo-tagged aerial images database.
+  
+Difficutlies:
+  Its difficulties root in the drastic view changes (geometric layout) and different capturing time between two views.
+
+{Despite these difficulties, recent works achieve outstanding progress on cross-view geo-localization benchmarks}
+
+Problem and causes:
+  However, existing methods still suffer from poor performance on the cross-area benchmarks, in which the training and testing data are captured from two different regions.
+  
+  We attribute this deficiency to the lack of ability to extract the spatial configuration of visual feature layouts and models' overfitting on low-level details from the training set. (我认为这里作者想说的是，模型无法去捕捉到更高层次objects层次的layout features, 比如一张图上，两个标志性建筑之间，两个标志性马路之间的spatial correlations; 模型过拟合于更low-level的低于objects层次的features)
+  
+Their strategies and contributions:
+  (1) In this paper, we propose GeoDTR which explicitly disentangles geometric information from raw features and learn the spatial correlations among visual features from aerial and ground pairs with a novel geometric layout extractor module. 
+  This module generates a set of geometric layout descriptors, modulating the raw features and producing high-quality latent representations. 
+  (2) In addition, we elaborate on two categories of data augmentations, (i) Layout simulation, which varies the spatial configuration while keep the low-level details intact. (ii) Semantic augmentation, which alters the low-level details and encourages the model to capture spatial configurations.
+  These augmentations help to improve the performance of the cross-view geo-localization models, especially on the cross-area benchmarks.
+  (3) Moreover, we propose a counterfactual-based learning process to benefit the geometric layout extractor in exploring spatial information. 
+  
+  Extensive experiments show that GeoDTR not only achieves state-of-the-art results but also significantly boosts the performance on same-area and cross-area benchmarks.
+  
+  
+  
+Introduction:
+
+  Difficulties:
+  Cross-view geo-localization is considered an extremely challenging problem because of 
+(i) the drastic change of viewpoint; (ii) the difference in capturing time; (iii) the different resolution between ground and aerial images;
+  
+  Cores to overcome difficulties:
+  (i) detailed understanding of the image content in objects level and lower-level; after understand the image raw features from both objects and some lower-level, model is required to understand the spatial configuration of these visual features, (e.g., buildings and roads).
+  
+  Problems of previous methods:
+  {Previous methods with only CNN feature extractor lack the ability to explore the spatial configurations of visual features; recently, with the advancement of Transformer, several methods explore extracting latent features from global contextual information. However, such methods solely rely on multi-head attention mechanism to implicitly explore correlations in the input features. visual content features 和 spatial configurations correspondences are entangled together.}
+  
+  Their contributions:
+  This paper introduces GeoDTR which processes the low-level feature (我觉得还是including object features?) and spatial configuration of visual features separately. (本作希望entangle the image descriptor into 2 parts, 先encode visual features, 再encode spatial configuration)
+  To capture spatial configuration, we propose a novel geometric layout extractor sub-module. this sub-module generates a set of geometric layout descriptors that relects the global contextual information among visual features in an image.
+  We also strengthen the quality of the geometric layout descriptors through Layout simulation, semantic augmentation (LS) and a counterfactaul (CF) training schema. LS generates different layouts for aerial and ground pairs with pertubed low-level details which improves the diversity of training aerial-ground pairs. Unlike existing data augmentation methods in cross-view geo-localization, LS maintains the geometric/spatial correspondence during training. Thus, it can be universally applied to any geo-localization method. Moreover, we observe that LS improves the performance on cross-area experiments because of the regularization of LS. We introduce a novel distance-based counterfactual (CF) training schema to fortify the learning of the extracted descriptors. Specifically, it provides 
+  
+  
+
+
+Methodology:
+
+Problem Formulation:
+  same as i known;
+  
+Geometric Layout Modulated Representations:
+  High-quality latent representation need (i) spatial configurations of visual features and (ii) visual features from low-level (I believe it should from multi-scale levels).
+  The spatial configuration reflects not only the positions but also the global contextual information among visual features in an image. One could expect such geometric information to be stable during the view-change
